@@ -1,30 +1,52 @@
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
-import 'package:avatars/avatars.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hawk_fab_menu/hawk_fab_menu.dart';
+import 'package:todo/screens/empty_list_screen.dart';
+import 'package:todo/screens/text_content.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({
     super.key,
   });
 
   @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen>
+    with SingleTickerProviderStateMixin {
+  late TabController _controller;
+
+  @override
+  void initState() {
+    _controller = TabController(length: 5, vsync: this);
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: false,
+        automaticallyImplyLeading: true,
         backgroundColor: Colors.white,
         elevation: 0,
-        leading: Avatar(
-          margin: const EdgeInsets.only(top: 10, left: 10),
-          textStyle: const TextStyle(fontSize: 40),
-          sources: [
-            GitHubSource(
-              'luckyseven',
-            ),
-          ],
+
+        leading: GestureDetector(
+          child: const Icon(
+            Icons.arrow_back_ios,
+            color: Colors.black,
+          ),
+          onTap: () {
+            Navigator.pop(context);
+          },
         ),
+        // leading: Avatar(
+        //   margin: const EdgeInsets.only(top: 10, left: 10),
+        //   sources: [
+        //     GitHubSource(
+        //       'luckyseven',
+        //     ),
+        //   ],
+        // ),
         title: Opacity(
           opacity: 0.5,
           child: Text(
@@ -61,9 +83,25 @@ class HomeScreen extends StatelessWidget {
                 // const SizedBox(
                 //   width: 30,
                 // ),
-                const FloatingActionButton(
-                  onPressed: null,
-                  child: Icon(Icons.add),
+                FloatingActionButton(
+                  tooltip: 'Create an notes',
+                  // shape: const RoundedRectangleBorder(
+                  //     // side: BorderSide(width: 2, color: Colors.white),
+                  //     // borderRadius: BorderRadius.all(
+                  //     //   Radius.circular(
+                  //     //     8,
+                  //     //   ),
+                  //     // ),
+                  //     ),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const TextContentScreen(),
+                      ),
+                    );
+                  },
+                  child: const Icon(Icons.add),
                 ),
               ],
             ),
@@ -71,38 +109,151 @@ class HomeScreen extends StatelessWidget {
           const SizedBox(
             height: 40,
           ),
-          DropdownSearch<String>(
-            popupProps: const PopupProps.menu(
-              showSelectedItems: true,
-            ),
-            items: const [
-              "Private",
-              "Public",
-              "Movies",
-              "Gaming",
-              "Music",
-            ],
-            dropdownDecoratorProps: const DropDownDecoratorProps(
-              dropdownSearchDecoration: InputDecoration(
-                labelText: "List of ",
-                hintText: "Secelt items",
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(
-                      22,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+                // child: DropdownButton(items: const [
+                //   DropdownMenuItem(
+                //     // value: "#All",
+                //     child: Text(
+                //       '#All',
+                //       style: TextStyle(color: Colors.black),
+                //     ),
+                //   ),
+                //   DropdownMenuItem(
+                //     // value: "#All",
+                //     child: Text(
+                //       '#All',
+                //       style: TextStyle(color: Colors.black),
+                //     ),
+                //   ),
+                //   DropdownMenuItem(
+                //     // value: "#All",
+                //     child: Text(
+                //       '#Work',
+                //       style: TextStyle(color: Colors.black),
+                //     ),
+                //   ),
+                //   DropdownMenuItem(
+                //     // value: "#All",
+                //     child: Text(
+                //       '#Personal',
+                //       style: TextStyle(color: Colors.black),
+                //     ),
+                //   ),
+                //   DropdownMenuItem(
+                //     // value: "#All",
+                //     child: Text(
+                //       '#Fitness',
+                //       style: TextStyle(color: Colors.black),
+                //     ),
+                //   ),
+                //   DropdownMenuItem(
+                //     // value: "#All",
+                //     child: Text(
+                //       '#Books',
+                //       style: TextStyle(color: Colors.black),
+                //     ),
+                //   ),
+                // ], onChanged: null),
+                child: SizedBox(
+                  width: 200,
+                  child: DropdownSearch<String>(
+                    popupProps: const PopupProps.menu(
+                      showSelectedItems: true,
+                    ),
+                    items: const [
+                      "#All",
+                      "#Work",
+                      "#Personal",
+                      "#Fitness",
+                      "#Music",
+                    ],
+                    dropdownDecoratorProps: const DropDownDecoratorProps(
+                      dropdownSearchDecoration: InputDecoration(
+                        hintText: "Select...",
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(
+                              22,
+                            ),
+                          ),
+                        ),
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
+              Container(
+                padding: const EdgeInsets.fromLTRB(15, 15, 25, 15),
+                child: const Row(
+                  children: [
+                    Icon(
+                      Icons.list_alt,
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Icon(
+                      Icons.menu,
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
-          const TabBarView(
-              // controller: ,
-              children: [
-                Center(
-                  child: Text('#All'),
-                )
-              ]),
+          const SizedBox(
+            height: 13,
+          ),
+          TabBar(
+            isScrollable: true,
+            controller: _controller,
+            tabs: const <Widget>[
+              Tab(
+                child: Text(
+                  '#All',
+                  style: TextStyle(
+                    color: Colors.black,
+                  ),
+                ),
+              ),
+              Tab(
+                child: Text(
+                  '#Work',
+                  style: TextStyle(
+                    color: Colors.black,
+                  ),
+                ),
+              ),
+              Tab(
+                child: Text(
+                  '#Presonal',
+                  style: TextStyle(
+                    color: Colors.black,
+                  ),
+                ),
+              ),
+              Tab(
+                child: Text(
+                  '#Fitness',
+                  style: TextStyle(
+                    color: Colors.black,
+                  ),
+                ),
+              ),
+              Tab(
+                child: Text(
+                  '#All',
+                  style: TextStyle(
+                    color: Colors.black,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const EmptyListScreen(),
         ],
       ),
     );
