@@ -23,7 +23,7 @@ class WelcomeScreen extends StatelessWidget {
                     fontWeight: FontWeight.w500),
               ),
               const SizedBox(
-                height: 20,
+                height: 60,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
