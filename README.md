@@ -1,16 +1,14 @@
 # todo
 
-A new Flutter project.
+Still Working
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+![Simulator Screenshot - iPhone 14 Pro Max - 2023-09-25 at 09 28 25](https://github.com/ValiiJ/ToDo/assets/85800317/fb7088cb-b2f2-4b3f-b283-fc107920c094)
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+![Simulator Screenshot - iPhone 14 Pro Max - 2023-09-25 at 09 28 21](https://github.com/ValiiJ/ToDo/assets/85800317/4d5c36c1-ec27-445c-ade3-2b4434248b71)
+![Simulator Screenshot - iPhone 14 Pro Max - 2023-09-25 at 09 28 15](https://github.com/ValiiJ/ToDo/assets/85800317/0abdd1f6-8031-4711-8633-4a45edaf6615)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+![Simulator Screenshot - iPhone 14 Pro Max - 2023-09-25 at 09 28 19](https://github.com/ValiiJ/ToDo/assets/85800317/d6058c38-e16f-4296-8801-be01f3c4d5f8)
+
